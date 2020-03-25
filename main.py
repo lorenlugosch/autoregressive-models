@@ -40,7 +40,7 @@ if not train:
 	x,T,idxs = batch
 	encoded, predicted, diff = model(x,T)
 	fbank = model.compute_fbank((x,T))
-	plt.subplot(2,1,1); plt.imshow(predicted[0].detach().transpose(0,1)); plt.subplot(2,1,2); plt.imshow(fbank[0].detach().transpose(0,1)); plt.show()
+	plt.subplot(2,1,1); plt.imshow(predicted[0].cpu().detach().transpose(0,1)); plt.subplot(2,1,2); plt.imshow(fbank[0].cpu().detach().transpose(0,1)); plt.show()
 	t = 3; ((diff[0]**2).mean(1).detach() > t).sum(); plt.plot((diff[0]**2).mean(1).detach() > t); plt.show()
 #######################
 

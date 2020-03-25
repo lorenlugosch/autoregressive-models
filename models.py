@@ -128,6 +128,7 @@ class ComputeFBANK(torch.nn.Module):
                     "round_to_power_of_two": False,
                     "sample_frequency":16000.0,
                 }
+		self.frame_skipping=config.frame_skipping
 
 	def forward(self, input):
 		"""
@@ -144,5 +145,8 @@ class ComputeFBANK(torch.nn.Module):
 			fbanks.append(fbank_)
 
 		fbank = torch.stack(fbanks)
-		return fbank
+		if self.frame_skipping:
+			return fbank[:,::2,:]
+		else:
+			return fbank
 

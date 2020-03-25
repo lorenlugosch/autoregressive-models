@@ -33,6 +33,7 @@ def read_config(config_file):
 	config.num_layers=int(parser.get("model", "num_layers"))
 	config.num_hidden=int(parser.get("model", "num_hidden"))
 	config.num_mel_bins=int(parser.get("model", "num_mel_bins"))
+	config.frame_skipping=parser.get("model", "frame_skipping")=="True"
 
 	#[training]
 	config.base_path=parser.get("training", "base_path")
@@ -51,7 +52,7 @@ def get_ASR_datasets(config):
 	base_path = config.base_path
 
 	# Get dfs
-	train_df = pd.read_csv(os.path.join(base_path, "train-clean-360.csv")) #"train_data.csv"))
+	train_df = pd.read_csv(os.path.join(base_path, "train_data.csv")) #"train-clean-360.csv")) #"train_data.csv"))
 	valid_df = pd.read_csv(os.path.join(base_path, "valid_data.csv"))
 	test_df = pd.read_csv(os.path.join(base_path, "test_data.csv"))
 
